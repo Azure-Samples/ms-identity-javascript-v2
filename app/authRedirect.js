@@ -9,17 +9,14 @@ myMSALObj.handleRedirectCallback(authRedirectCallBack);
 
 function authRedirectCallBack(error, response) {
     if (error) {
-        console.log(error);
+        console.error(error);
     } else {
-        if (response.tokenType === "id_token") {
+        if (myMSALObj.getAccount()) {
             console.log('id_token acquired at: ' + new Date().toString());
-        } else if (response.tokenType === "access_token") {
+            showWelcomeMessage(myMSALObj.getAccount());
+            getTokenRedirect(loginRequest);
+        } else if (response.tokenType === "Bearer") {
             console.log('access_token acquired at: ' + new Date().toString());
-            accessToken = response.accessToken;
-
-            callMSGraph(graphConfig.graphMailEndpoint, accessToken, updateUI);
-            profileButton.style.display = 'none';
-            mailButton.style.display = 'initial';
         } else {
             console.log("token type is:" + response.tokenType);
         }
@@ -40,15 +37,15 @@ function signOut() {
 }
 
 // This function can be removed if you do not need to support IE
-function getTokenRedirect(request, endpoint) {
-    return myMSALObj.acquireTokenSilent(request, endpoint)
+function getTokenRedirect(request) {
+    return myMSALObj.acquireTokenSilent(request)
         .then((response) => {
             console.log(response);
             if (response.accessToken) {
                 console.log('access_token acquired at: ' + new Date().toString());
                 accessToken = response.accessToken;
 
-                callMSGraph(endpoint, response.accessToken, updateUI);
+                callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
                 profileButton.style.display = 'none';
                 mailButton.style.display = 'initial';
             }
@@ -56,14 +53,14 @@ function getTokenRedirect(request, endpoint) {
         .catch(error => {
             console.log("silent token acquisition fails. acquiring token using redirect");
             // fallback to interaction when silent call fails
-            return myMSALObj.acquireTokenRedirect(request)
+            return myMSALObj.acquireTokenRedirect(request);
         });
 }
 
 function seeProfile() {
-    getTokenRedirect(loginRequest, graphConfig.graphMeEndpoint);
+    getTokenRedirect(loginRequest);
 }
 
 function readMail() {
-    getTokenRedirect(tokenRequest, graphConfig.graphMailEndpoint);
+    getTokenRedirect(tokenRequest);
 }

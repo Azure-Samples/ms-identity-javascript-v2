@@ -12,7 +12,7 @@ function signIn() {
                 showWelcomeMessage(myMSALObj.getAccount());
             }
         }).catch(error => {
-            console.log(error);
+            console.error(error);
         });
 }
 
@@ -31,7 +31,7 @@ function getTokenPopup(request) {
                 .then(tokenResponse => {
                     return tokenResponse;
                 }).catch(error => {
-                    console.log(error);
+                    console.error(error);
                 });
         });
 }
@@ -44,7 +44,7 @@ function seeProfile() {
                 profileButton.classList.add('d-none');
                 mailButton.classList.remove('d-none');
             }).catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }
 }
@@ -55,7 +55,7 @@ function readMail() {
             .then(response => {
                 callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
             }).catch(error => {
-                console.log(error);
+                console.error(error);
             });
     }
 }

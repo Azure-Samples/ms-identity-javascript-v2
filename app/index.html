@@ -17,13 +17,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand" href="/">MS Identity Platform</a>
       <div class="btn-group ml-auto dropleft">
-          <button type="button" id="SignIn" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button" id="SignIn" class="btn btn-secondary" onclick="signIn()">
             Sign In
           </button>
-          <div class="dropdown-menu">
-            <button class="dropdown-item" id="loginPopup" onclick="signIn(this.id)">Sign in using Popup</button>
-            <button class="dropdown-item" id="loginRedirect" onclick="signIn(this.id)">Sign in using Redirect</button>
-          </div>
       </div>
     </nav>
     <br>
@@ -68,8 +64,8 @@
     <script type="text/javascript" src="./graphConfig.js"></script>
     <script type="text/javascript" src="./ui.js"></script>
     
-    <!-- replace next line with authRedirect.js if you would like to use the redirect flow -->
     <!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
+    <!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->
     <script type="text/javascript" src="./authPopup.js"></script>
     <script type="text/javascript" src="./graph.js"></script>
   </body>
