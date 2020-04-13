@@ -1,53 +1,73 @@
 ---
 page_type: sample
 languages:
-- csharp
+- javascript
 products:
-- dotnet
-description: "Add 150 character max description"
-urlFragment: "update-this-to-unique-url-stub"
+- msal
+description: "A simple JavaScript Single-Page Application using @azure/msal-browser"
+urlFragment: "README"
 ---
 
-# Official Microsoft Sample
+# MSAL 2.x JavaScript Sample Application
 
-<!-- 
-Guidelines on README format: https://review.docs.microsoft.com/help/onboard/admin/samples/concepts/readme-template?branch=master
-
-Guidance on onboarding samples to docs.microsoft.com/samples: https://review.docs.microsoft.com/help/onboard/admin/samples/process/onboarding?branch=master
-
-Taxonomies for products and languages: https://review.docs.microsoft.com/new-hope/information-architecture/metadata/taxonomies?branch=master
--->
-
-Give a short description for your sample here. What does it do and why is it important?
+A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as Microsoft Graph API.
 
 ## Contents
 
-Outline the file contents of the repository. It helps users navigate the codebase, build configuration and any related assets.
-
 | File/folder       | Description                                |
 |-------------------|--------------------------------------------|
-| `src`             | Sample source code.                        |
+| `app`             | Contains sample source files               |
+| `authPopup.js`    | Main authentication logic resides here (using Popup flow).            |
+| `authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow.   |
+| `authConfig.js`   | Contains configuration parameters for the sample. |
+| `graph.js`        | Provides a helper function for calling MS Graph API.   |
+| `graphConfig.js`  | Contains API endpoints for MS Graph.       |
+| `ui.js`           | Contains UI logic.                         |
+| `index.html`      |  Contains the UI of the sample.            |
 | `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
+| `changelog.md`    | List of changes to the sample.             |
+| `CODE_OF_CONDUCT.md` | Code of Conduct information.            |
 | `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
+| `package.json`    | Package manifest for npm.                   |
 | `README.md`       | This README file.                          |
 | `LICENSE`         | The license for the sample.                |
+| `SECURITY.md`     | Security disclosures.                      |
+| `server.js`     | Implements a simple Node server to serve index.html.  |
 
 ## Prerequisites
 
-Outline the required components and tools that a user might need to have on their machine in order to run the sample. This can be anything from frameworks, SDKs, OS versions or IDE releases.
+[Node](https://nodejs.org/en/) must be installed to run this sample.
 
 ## Setup
 
-Explain how to prepare the sample once the user clones or downloads the repository. The section should outline every step necessary to install dependencies and set up any settings (for example, API keys and output folders).
+1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
+2. Open the [/app/authConfig.js](./app/authConfig.js) file and provide the required configuration values.
+3. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
 
 ## Running the sample
 
-Outline step-by-step instructions to execute the sample and see its output. Include steps for executing the sample from the IDE, starting specific services in the Azure portal or anything related to the overall launch of the code.
+1. Configure authentication and authorization parameters:
+   1. Open `authConfig.js`
+   2. Replace the string `"Enter_the_Application_Id_Here"` with your app/client ID on AAD Portal.
+   3. Replace the string `"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here"` with `"https://login.microsoftonline.com/common/"` (*note*: This is for multi-tenant applications located on the global Azure cloud. For more information, see the [documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-javascript)).
+   4. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on AAD Portal.
+2. Configure the parameters for calling MS Graph API:
+   1. Open `graphConfig.js`.
+   2. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me"` with `"https://graph.microsoft.com/v1.0/me"`.
+   3. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me/messages"` with `"https://graph.microsoft.com/v1.0/me/messages"`.
+3. To start the sample application, run `npm start`.
+4. Finally, open a browser to [http://localhost:3000](http://localhost:3000).
 
 ## Key concepts
 
-Provide users with more context on the tools and services used in the sample. Explain some of the code that is being used and how services interact with each other.
+This sample demonstrates the following MSAL workflows:
+
+* How to configure application parameters.
+* How to sign-in with popup and redirect methods.
+* How to sign-out.
+* How to get user consent incrementally.
+* How to acquire an access token.
+* How to make an API call with the access token.
 
 ## Contributing
 
