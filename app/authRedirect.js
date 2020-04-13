@@ -1,6 +1,8 @@
+import msal from "@azure/msal-browser";
+
 // Create the main myMSALObj instance
 // configuration parameters are located at authConfig.js
-const myMSALObj = new Msal.UserAgentApplication(msalConfig);
+const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let accessToken;
 

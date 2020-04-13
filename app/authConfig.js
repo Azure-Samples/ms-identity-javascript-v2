@@ -22,3 +22,9 @@ const loginRequest = {
 const tokenRequest = {
     scopes: ["Mail.Read"]
 };
+
+// Add here scopes for token to be fetched silently
+const silentRequest = {
+    scopes: ["User.Read", "Mail.Read"],
+    forceRefresh: false
+};
