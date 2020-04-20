@@ -1,0 +1,53 @@
+{
+    "Sample": {
+      "Title": "A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)",
+      "Level": 100,
+      "Client": "SinglePageApplication",
+      "Service": "Microsoft Graph",
+      "RepositoryUrl": "ms-identity-javascript-v2",
+      "Endpoint": "AAD v2.0"
+    },
+
+    "AADApps": [
+      {
+        "Id": "spa",
+        "Name": "ms-identity-javascript-v2",
+        "Kind" :  "SinglePageApplication",
+        "HomePage": "http://localhost:3000/",
+        "ReplyUrls":"http://localhost:3000/",
+        "RequiredResourcesAccess": [
+          {
+            "Resource": "Microsoft Graph",
+            "DelegatedPermissions": [ "User.Read" ]
+          }
+        ],
+        "ManualSteps": [
+            {
+              "Comment": "Navigate to the Manifest page, find the replyUrlsWithType section and change the type of redirect URI to 'SPA'"
+            }
+        ]
+      }
+    ],
+  
+    "CodeConfiguration": [
+      {
+        "App": "spa",
+        "SettingKind": "Text",
+        "SettingFile": "\\..\\app\\authConfig.js",
+        "Mappings": [
+          {
+            "key": "clientId",
+            "value": ".AppId"
+          },
+          {
+            "key": "authority",
+            "value": "\"https://login.microsoftonline.com/\"+$tenantName"
+          },
+          {
+            "key": "redirectUri",
+            "value": ".HomePage"
+          }
+        ]
+      }
+    ]
+  }
