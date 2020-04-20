@@ -42,7 +42,7 @@
             }
           },
           {
-            "settingFile": "/JavaScriptSPA/graphConfig.js", 
+            "settingFile": "/app/graphConfig.js", 
               "replaceTokens": 
                 {
                 "msgraphEndpointHost": "Enter_the_Graph_Endpoint_Here"

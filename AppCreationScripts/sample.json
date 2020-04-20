@@ -23,7 +23,7 @@
         ],
         "ManualSteps": [
             {
-              "Comment": "Navigate to the Manifest page, find the replyUrlsWithType section and change the type of redirect URI to 'SPA'"
+              "Comment": "Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'SPA'"
             }
         ]
       }
@@ -32,20 +32,35 @@
     "CodeConfiguration": [
       {
         "App": "spa",
-        "SettingKind": "Text",
+        "SettingKind": "Replace",
         "SettingFile": "\\..\\app\\authConfig.js",
         "Mappings": [
           {
-            "key": "clientId",
+            "key": "Enter_the_Application_Id_Here",
             "value": ".AppId"
           },
           {
-            "key": "authority",
+            "key": "Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here",
             "value": "\"https://login.microsoftonline.com/\"+$tenantName"
           },
           {
-            "key": "redirectUri",
+            "key": "Enter_the_Redirect_Uri_Here",
             "value": ".HomePage"
+          }
+        ]
+      },
+      {
+        "App": "spa",
+        "SettingKind": "Text",
+        "SettingFile": "\\..\\app\\graphConfig.js",
+        "Mappings": [
+          {
+            "key": "graphMeEndpoint",
+            "value": "'https://graph.microsoft.com/v1.0/me/'"
+          },
+          {
+            "key": "graphMailEndpoint",
+            "value": "'https://graph.microsoft.com/v1.0/me/messages/'"
           }
         ]
       }
