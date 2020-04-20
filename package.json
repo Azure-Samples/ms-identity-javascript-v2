@@ -1,7 +1,7 @@
 {
   "name": "ms-identity-javascript-v2",
   "version": "1.0.0",
-  "description": "---\r page_type: sample\r languages:\r - csharp\r products:\r - dotnet\r description: \"Add 150 character max description\"\r urlFragment: \"update-this-to-unique-url-stub\"\r ---",
+  "description": "---\r page_type: sample\r languages:\r - javascript\r products:\r - ms-identity\r description: \"A JavaScript single-page application which demonstrates how to configure MSAL.js to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph API.\"\r urlFragment: ms-identity-javascript-v2\r ---",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
