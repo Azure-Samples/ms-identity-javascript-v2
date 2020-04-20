@@ -15,7 +15,6 @@ function showWelcomeMessage(account) {
     // Reconfiguring DOM elements
     cardDiv.style.display = 'initial';
     welcomeDiv.innerHTML = `Welcome ${account.name}`;
-    signInButton.nextElementSibling.style.display = 'none';
     signInButton.setAttribute("onclick", "signOut();");
     signInButton.setAttribute('class', "btn btn-success")
     signInButton.innerHTML = "Sign Out";

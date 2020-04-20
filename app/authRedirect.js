@@ -51,7 +51,7 @@ function getTokenRedirect(request) {
             }
         })
         .catch(error => {
-            console.log("silent token acquisition fails. acquiring token using redirect");
+            console.warn("silent token acquisition fails. acquiring token using redirect");
             // fallback to interaction when silent call fails
             return myMSALObj.acquireTokenRedirect(request);
         });

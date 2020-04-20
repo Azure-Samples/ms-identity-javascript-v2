@@ -4,13 +4,13 @@ languages:
 - javascript
 products:
 - msal
-description: "A simple JavaScript Single-Page Application using @azure/msal-browser"
-urlFragment: "README"
+description: "A simple JavaScript Single-Page Application using the Auth Code flow w/ PKCE"
+urlFragment: "ms-identity-javascript-v2"
 ---
 
 # MSAL 2.x JavaScript Sample Application
 
-A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as Microsoft Graph API.
+A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as Microsoft Graph API. This version of the MSAL.js library uses the Authorization Code flow w/ PKCE.
 
 ## Contents
 
@@ -40,7 +40,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 
 ## Setup
 
-1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [implicit flow](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow).
+1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type `SPA`.
 2. Open the [/app/authConfig.js](./app/authConfig.js) file and provide the required configuration values.
 3. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
 
