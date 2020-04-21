@@ -26,5 +26,5 @@ const tokenRequest = {
 // Add here scopes for token to be fetched silently
 const silentRequest = {
     scopes: [msalConfig.clientId, "User.Read", "Mail.Read"],
-    forceRefresh: false
+    forceRefresh: false // set this to "true" if you would like to skip a cached token and go to the server
 };
