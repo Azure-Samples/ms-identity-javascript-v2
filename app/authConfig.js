@@ -20,11 +20,6 @@ const loginRequest = {
 
 // Add here scopes for access token to be used at MS Graph API endpoints.
 const tokenRequest = {
-    scopes: ["User.Read", "Mail.Read"]
-};
-
-// Add here scopes for token to be fetched silently
-const silentRequest = {
-    scopes: [msalConfig.clientId, "User.Read", "Mail.Read"],
+    scopes: ["User.Read", "Mail.Read"],
     forceRefresh: false // set this to "true" if you would like to skip a cached token and go to the server
 };
