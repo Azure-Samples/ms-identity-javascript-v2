@@ -19,15 +19,13 @@ const app = express();
 
 // Initialize variables.
 let port = DEFAULT_PORT; // -p {PORT} || 3000;
+
 if (argv.p) {
     port = argv.p;
 }
 
 // Configure morgan module to log all requests.
 app.use(morgan('dev'));
-
-// Set the front-end folder to serve public assets.
-app.use("/lib", express.static(path.join(__dirname, "../../lib/msal-browser/lib")));
 
 // Setup app folders
 app.use(express.static('app'));

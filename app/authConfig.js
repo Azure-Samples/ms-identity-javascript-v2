@@ -20,6 +20,5 @@ const loginRequest = {
 
 // Add here scopes for access token to be used at MS Graph API endpoints.
 const tokenRequest = {
-    scopes: ["User.Read", "Mail.Read"],
-    forceRefresh: false // set this to "true" if you would like to skip a cached token and go to the server
+    scopes: ["User.Read", "Mail.Read"]
 };

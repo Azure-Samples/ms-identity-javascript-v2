@@ -2,8 +2,11 @@
 page_type: sample
 languages:
 - javascript
+- html
 products:
-- msal
+- microsoft-identity-platform
+- azure-active-directory-v2
+- microsoft-graph-api
 description: "A simple JavaScript Single-Page Application using the Auth Code flow w/ PKCE"
 urlFragment: "ms-identity-javascript-v2"
 ---
@@ -25,7 +28,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 | `ui.js`           | Contains UI logic.                         |
 | `index.html`      |  Contains the UI of the sample.            |
 | `.gitignore`      | Define what to ignore at commit time.      |
-| `changelog.md`    | List of changes to the sample.             |
+| `CHANGELOG.md`    | List of changes to the sample.             |
 | `CODE_OF_CONDUCT.md` | Code of Conduct information.            |
 | `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
 | `package.json`    | Package manifest for npm.                   |
@@ -49,7 +52,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 1. Configure authentication and authorization parameters:
    1. Open `authConfig.js`
    2. Replace the string `"Enter_the_Application_Id_Here"` with your app/client ID on AAD Portal.
-   3. Replace the string `"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here"` with `"https://login.microsoftonline.com/common/"` (*note*: This is for multi-tenant applications located on the global Azure cloud. For more information, see the [documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-v2-javascript)).
+   3. Replace the string `"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here"` with `"https://login.microsoftonline.com/common/"` (*note*: This is for multi-tenant applications located on the global Azure cloud. For more information, see the [documentation](https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-javascript)).
    4. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on AAD Portal.
 2. Configure the parameters for calling MS Graph API:
    1. Open `graphConfig.js`.
