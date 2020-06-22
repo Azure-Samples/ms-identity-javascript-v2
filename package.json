@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-v2#readme",
   "dependencies": {
-    "@azure/msal-browser": "^2.0.0-beta.0",
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "yargs": "^15.3.1"
