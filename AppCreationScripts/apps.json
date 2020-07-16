@@ -15,8 +15,6 @@
             "type": "spa"
           }
         ],
-        "oauth2AllowImplicitFlow": true,
-        "oauth2AllowIdTokenImplicitFlow": true,
         "requiredResourceAccess": [
           {
             "x-ms-resourceAppName": "Microsoft Graph",
