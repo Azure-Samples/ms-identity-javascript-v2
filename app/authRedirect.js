@@ -15,7 +15,10 @@ function handleResponse(resp) {
         username = resp.account.username;
         showWelcomeMessage(resp.account);
     } else {
-        // need to call getAccount here?
+        /**
+         * See here for more info on account retrieval: 
+         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+         */
         const currentAccounts = myMSALObj.getAllAccounts();
         if (currentAccounts === null) {
             return;
@@ -42,6 +45,10 @@ function signOut() {
 }
 
 function getTokenRedirect(request) {
+    /**
+     * See here for more info on account retrieval: 
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
     request.account = myMSALObj.getAccountByUsername(username);
     return myMSALObj.acquireTokenSilent(request).catch(error => {
             console.warn("silent token acquisition fails. acquiring token using redirect");

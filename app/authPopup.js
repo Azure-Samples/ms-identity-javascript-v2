@@ -5,7 +5,10 @@ const myMSALObj = new msal.PublicClientApplication(msalConfig);
 let username = "";
 
 function loadPage() {
-    // need to call getAccount here?
+    /**
+     * See here for more info on account retrieval: 
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
     const currentAccounts = myMSALObj.getAllAccounts();
     if (currentAccounts === null) {
         return;
