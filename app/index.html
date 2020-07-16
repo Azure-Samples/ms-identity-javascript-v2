@@ -6,11 +6,11 @@
     <title>Quickstart | MSAL.JS Vanilla JavaScript SPA</title>
     
     <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
-    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.0.0-beta.2/js/msal-browser.js"></script>
-    
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.0.0-beta.4/js/msal-browser.js" integrity="sha384-7sxY2tN3GMVE5jXH2RL9AdbO6s46vUh9lUid4yNCHJMUzDoj+0N4ve6rLOmR88yN" crossorigin="anonymous"></script>
+
     <!-- msal.js with a fallback to backup CDN -->
     <script type="text/javascript">
-      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.0.0-beta.2/js/msal-browser.js' type='text/javascript' %3E%3C/script%3E"));
+      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.0.0-beta.4/js/msal-browser.js' type='text/javascript' integrity='sha384-7sxY2tN3GMVE5jXH2RL9AdbO6s46vUh9lUid4yNCHJMUzDoj+0N4ve6rLOmR88yN' crossorigin='anonymous' %3E%3C/script%3E"));
     </script>
 
     <!-- adding Bootstrap 4 for UI components  -->

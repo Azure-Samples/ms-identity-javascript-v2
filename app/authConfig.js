@@ -10,15 +10,39 @@ const msalConfig = {
     cache: {
         cacheLocation: "sessionStorage", // This configures where your cache will be stored
         storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+    },
+    system: {
+        loggerOptions: {
+            loggerCallback: (level, message, containsPii) => {
+                if (containsPii) {	
+                    return;	
+                }	
+                switch (level) {	
+                    case msal.LogLevel.Error:	
+                        console.error(message);	
+                        return;	
+                    case msal.LogLevel.Info:	
+                        console.info(message);	
+                        return;	
+                    case msal.LogLevel.Verbose:	
+                        console.debug(message);	
+                        return;	
+                    case msal.LogLevel.Warning:	
+                        console.warn(message);	
+                        return;	
+                }
+            }
+        }
     }
 };
 
-// Add here scopes for id token to be used at MS Identity Platform endpoints.
+// Add here the scopes that you would like the user to consent during sign-in
 const loginRequest = {
-    scopes: ["openid", "profile", "User.Read"]
+    scopes: ["User.Read"]
 };
 
-// Add here scopes for access token to be used at MS Graph API endpoints.
+// Add here the scopes to request when obtaining an access token for MS Graph API
 const tokenRequest = {
-    scopes: ["User.Read", "Mail.Read"]
+    scopes: ["User.Read", "Mail.Read"],
+    forceRefresh: false // Set this to "true" to skip a cached token and go to the server to get a new token
 };

@@ -3,29 +3,33 @@
 const myMSALObj = new msal.PublicClientApplication(msalConfig);
 
 let accessToken;
-
-// Register Callbacks for Redirect flow
-myMSALObj.handleRedirectCallback(authRedirectCallBack);
-
-function authRedirectCallBack(error, response) {
-    if (error) {
-        console.error(error);
-    } else {
-        if (myMSALObj.getAccount()) {
-            console.log('id_token acquired at: ' + new Date().toString());
-            showWelcomeMessage(myMSALObj.getAccount());
-            getTokenRedirect(loginRequest);
-        } else if (response.tokenType === "Bearer") {
-            console.log('access_token acquired at: ' + new Date().toString());
-        } else {
-            console.log("token type is:" + response.tokenType);
-        }
-    }
-}
+let username = "";
 
 // Redirect: once login is successful and redirects with tokens, call Graph API
-if (myMSALObj.getAccount()) {
-    showWelcomeMessage(myMSALObj.getAccount());
+myMSALObj.handleRedirectPromise().then(handleResponse).catch(err => {
+    console.error(err);
+});
+
+function handleResponse(resp) {
+    if (resp !== null) {
+        username = resp.account.username;
+        showWelcomeMessage(resp.account);
+    } else {
+        /**
+         * See here for more info on account retrieval: 
+         * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+         */
+        const currentAccounts = myMSALObj.getAllAccounts();
+        if (currentAccounts === null) {
+            return;
+        } else if (currentAccounts.length > 1) {
+            // Add choose account code here
+            console.warn("Multiple accounts detected.");
+        } else if (currentAccounts.length === 1) {
+            username = currentAccounts[0].username;
+            showWelcomeMessage(currentAccounts[0]);
+        }
+    }
 }
 
 function signIn() {
@@ -33,34 +37,44 @@ function signIn() {
 }
 
 function signOut() {
-    myMSALObj.logout();
+    const logoutRequest = {
+        account: myMSALObj.getAccountByUsername(username)
+    };
+
+    myMSALObj.logout(logoutRequest);
 }
 
-// This function can be removed if you do not need to support IE
 function getTokenRedirect(request) {
-    return myMSALObj.acquireTokenSilent(request)
-        .then((response) => {
-            console.log(response);
-            if (response.accessToken) {
-                console.log('access_token acquired at: ' + new Date().toString());
-                accessToken = response.accessToken;
-
-                callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-                profileButton.style.display = 'none';
-                mailButton.style.display = 'initial';
-            }
-        })
-        .catch(error => {
+    /**
+     * See here for more info on account retrieval: 
+     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+     */
+    request.account = myMSALObj.getAccountByUsername(username);
+    return myMSALObj.acquireTokenSilent(request).catch(error => {
             console.warn("silent token acquisition fails. acquiring token using redirect");
-            // fallback to interaction when silent call fails
-            return myMSALObj.acquireTokenRedirect(request);
+            if (error instanceof msal.InteractionRequiredAuthError) {
+                // fallback to interaction when silent call fails
+                return myMSALObj.acquireTokenRedirect(request);
+            } else {
+                console.warn(error);   
+            }
         });
 }
 
 function seeProfile() {
-    getTokenRedirect(loginRequest);
+    getTokenRedirect(loginRequest).then(response => {
+        callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
+        profileButton.classList.add('d-none');
+        mailButton.classList.remove('d-none');
+    }).catch(error => {
+        console.error(error);
+    });
 }
 
 function readMail() {
-    getTokenRedirect(tokenRequest);
+    getTokenRedirect(tokenRequest).then(response => {
+        callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
+    }).catch(error => {
+        console.error(error);
+    });
 }
