@@ -36,12 +36,12 @@ const msalConfig = {
     }
 };
 
-// Add here scopes for id token to be used at MS Identity Platform endpoints.
+// Add here the scopes that you would like the user to consent during sign-in
 const loginRequest = {
     scopes: ["User.Read"]
 };
 
-// Add here scopes for access token to be used at MS Graph API endpoints.
+// Add here the scopes to request when obtaining an access token for MS Graph API
 const tokenRequest = {
     scopes: ["User.Read", "Mail.Read"],
     forceRefresh: false // Set this to "true" to skip a cached token and go to the server to get a new token
