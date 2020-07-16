@@ -42,16 +42,8 @@ function signOut() {
 }
 
 function getTokenRedirect(request) {
-    return myMSALObj.acquireTokenSilent(request).then((response) => {
-            console.log(response);
-            if (response.accessToken) {
-                console.log('access_token acquired at: ' + new Date().toString());
-
-                callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-                profileButton.style.display = 'none';
-                mailButton.style.display = 'initial';
-            }
-        }).catch(error => {
+    request.account = myMSALObj.getAccountByUsername(username);
+    return myMSALObj.acquireTokenSilent(request).catch(error => {
             console.warn("silent token acquisition fails. acquiring token using redirect");
             if (error instanceof msal.InteractionRequiredAuthError) {
                 // fallback to interaction when silent call fails
@@ -63,9 +55,19 @@ function getTokenRedirect(request) {
 }
 
 function seeProfile() {
-    getTokenRedirect(loginRequest);
+    getTokenRedirect(loginRequest).then(response => {
+        callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
+        profileButton.classList.add('d-none');
+        mailButton.classList.remove('d-none');
+    }).catch(error => {
+        console.error(error);
+    });
 }
 
 function readMail() {
-    getTokenRedirect(tokenRequest);
+    getTokenRedirect(tokenRequest).then(response => {
+        callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
+    }).catch(error => {
+        console.error(error);
+    });
 }
