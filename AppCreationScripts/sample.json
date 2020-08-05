@@ -2,7 +2,7 @@
     "Sample": {
       "Title": "A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)",
       "Level": 100,
-      "Client": "SinglePageApplication",
+      "Client": "Vanilla JavaScript SPA",
       "Service": "Microsoft Graph",
       "RepositoryUrl": "ms-identity-javascript-v2",
       "Endpoint": "AAD v2.0"

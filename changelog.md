@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 08/05/2020
+
+- Updated MSAL.js to 2.0.1.
+- Added issue & PR templates.
+
 ## 22/06/2020
 
 - Updated MSAL.js to 2.0.0-beta.2.
