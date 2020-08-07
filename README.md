@@ -4,9 +4,9 @@ languages:
 - javascript
 - html
 products:
-- microsoft-identity-platform
-- azure-active-directory-v2
-- microsoft-graph-api
+- microsoft-authentication-library
+- azure-active-directory
+- ms-graph
 description: "A simple JavaScript Single-Page Application using the Auth Code flow w/ PKCE"
 urlFragment: "ms-identity-javascript-v2"
 ---

@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Quickstart | MSAL.JS Vanilla JavaScript SPA</title>
+    <link rel="SHORTCUT ICON" href="./favicon.svg" type="image/x-icon">
     
     <!-- msal.min.js can be used in the place of msal.js; included msal.js to make debug easy -->
-    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.0.0/js/msal-browser.js" integrity="sha384-BqIcDtzVkr3wRGsSrk+iJJNm9GSdUsP0I2MplbnhPPc+I1l1d+dkKbcnqgNddGWX" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.0.1/js/msal-browser.js" integrity="sha384-knPh00kvaT+k3+4TCD5S2ORDNVc2I3RVbqI/ksbTlpdSBh8ZnyAPxW2kkTSG0+mT" crossorigin="anonymous"></script>
 
     <!-- msal.js with a fallback to backup CDN -->
     <script type="text/javascript">
-      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.0.0/js/msal-browser.js' type='text/javascript' integrity='sha384-BqIcDtzVkr3wRGsSrk+iJJNm9GSdUsP0I2MplbnhPPc+I1l1d+dkKbcnqgNddGWX' crossorigin='anonymous' %3E%3C/script%3E"));
+      if(typeof Msal === 'undefined')document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/browser/2.0.1/js/msal-browser.js' type='text/javascript' crossorigin='anonymous' %3E%3C/script%3E"));
     </script>
 
     <!-- adding Bootstrap 4 for UI components  -->
