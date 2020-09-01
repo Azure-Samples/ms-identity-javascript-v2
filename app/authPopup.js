@@ -50,13 +50,13 @@ function getTokenPopup(request) {
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
      */
     request.account = myMSALObj.getAccountByUsername(username);
+    
     return myMSALObj.acquireTokenSilent(request).catch(error => {
-        console.warn("silent token acquisition fails. acquiring token using redirect");
+        console.warn("silent token acquisition fails. acquiring token using popup");
         if (error instanceof msal.InteractionRequiredAuthError) {
             // fallback to interaction when silent call fails
             return myMSALObj.acquireTokenPopup(request).then(tokenResponse => {
                 console.log(tokenResponse);
-                
                 return tokenResponse;
             }).catch(error => {
                 console.error(error);

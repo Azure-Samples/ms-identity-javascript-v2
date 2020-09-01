@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 08/27/2020
+
+- Updated MSAL.js to 2.1.0.
+- Corrected documentation link in authConfig.js.
+- Minor README.md change.
+
 ## 08/05/2020
 
 - Updated MSAL.js to 2.0.1.

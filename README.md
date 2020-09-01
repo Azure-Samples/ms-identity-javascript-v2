@@ -11,7 +11,7 @@ description: "A simple JavaScript Single-Page Application using the Auth Code fl
 urlFragment: "ms-identity-javascript-v2"
 ---
 
-# MSAL 2.x JavaScript Sample Application
+# MSAL.js 2.x Vanilla JavaScript Single-page Application
 
 A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as Microsoft Graph API. This version of the MSAL.js library uses the Authorization Code flow w/ PKCE.
 
@@ -43,7 +43,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 
 ## Setup
 
-1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type `SPA`.
+1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type `SPA`.
 2. Open the [/app/authConfig.js](./app/authConfig.js) file and provide the required configuration values.
 3. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
 
@@ -59,7 +59,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
    2. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me"` with `"https://graph.microsoft.com/v1.0/me"`.
    3. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me/messages"` with `"https://graph.microsoft.com/v1.0/me/messages"`.
 3. To start the sample application, run `npm start`.
-4. Finally, open a browser to [http://localhost:3000](http://localhost:3000).
+4. Finally, open a browser and navigate to [http://localhost:3000](http://localhost:3000).
 
 ## Key concepts
 

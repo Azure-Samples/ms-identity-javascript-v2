@@ -1,6 +1,6 @@
 // Config object to be passed to Msal on creation.
 // For a full list of msal.js configuration parameters, 
-// visit https://azuread.github.io/microsoft-authentication-library-for-js/docs/msal/modules/_authenticationparameters_.html
+// visit https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
 const msalConfig = {
     auth: {
         clientId: "Enter_the_Application_Id_Here",
