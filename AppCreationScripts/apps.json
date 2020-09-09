@@ -12,7 +12,7 @@
       "replyUrlsWithType": [
         {
           "url": "http://localhost:3000/",
-          "type": "spa"
+          "type": "Spa"
         }
       ],
       "requiredResourceAccess": [
