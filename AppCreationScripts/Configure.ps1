@@ -2,8 +2,12 @@
 param(
     [PSCredential] $Credential,
     [Parameter(Mandatory=$False, HelpMessage='Tenant ID (This is a GUID which represents the "Directory ID" of the AzureAD tenant into which you want to create the apps')]
-    [string] $tenantId
+    [string] $tenantId,
+    [Parameter(Mandatory=$False, HelpMessage='Azure environment to use while running the script (it defaults to AzureCloud)')]
+    [string] $azureEnvironmentName
 )
+
+#Requires -Modules AzureAD -RunAsAdministrator
 
 <#
  This script creates the Azure AD applications needed for this sample and updates the configuration files
@@ -152,6 +156,11 @@ Function ConfigureApplications
    so that they are consistent with the Applications parameters
 #> 
     $commonendpoint = "common"
+    
+    if (!$azureEnvironmentName)
+    {
+        $azureEnvironmentName = "AzureCloud"
+    }
 
     # $tenantId is the Active Directory Tenant. This is a GUID which represents the "Directory ID" of the AzureAD tenant
     # into which you want to create the apps. Look it up in the Azure portal in the "Properties" of the Azure AD.
@@ -160,17 +169,17 @@ Function ConfigureApplications
     # you'll need to sign-in with creds enabling your to create apps in the tenant)
     if (!$Credential -and $TenantId)
     {
-        $creds = Connect-AzureAD -TenantId $tenantId
+        $creds = Connect-AzureAD -TenantId $tenantId -AzureEnvironmentName $azureEnvironmentName
     }
     else
     {
         if (!$TenantId)
         {
-            $creds = Connect-AzureAD -Credential $Credential
+            $creds = Connect-AzureAD -Credential $Credential -AzureEnvironmentName $azureEnvironmentName
         }
         else
         {
-            $creds = Connect-AzureAD -TenantId $tenantId -Credential $Credential
+            $creds = Connect-AzureAD -TenantId $tenantId -Credential $Credential -AzureEnvironmentName $azureEnvironmentName
         }
     }
 
@@ -178,6 +187,8 @@ Function ConfigureApplications
     {
         $tenantId = $creds.Tenant.Id
     }
+
+    
 
     $tenant = Get-AzureADTenantDetail
     $tenantName =  ($tenant.VerifiedDomains | Where { $_._Default -eq $True }).Name
@@ -193,7 +204,6 @@ Function ConfigureApplications
                                                -ReplyUrls "http://localhost:3000/" `
                                                -IdentifierUris "https://$tenantName/ms-identity-javascript-v2" `
                                                -AvailableToOtherTenants $True `
-                                               -Oauth2AllowImplicitFlow $true `
                                                -PublicClient $False
 
    # create the service principal of the newly created application 
@@ -245,7 +255,7 @@ Function ConfigureApplications
    Write-Host "IMPORTANT: Please follow the instructions below to complete a few manual step(s) in the Azure portal":
    Write-Host "- For 'spa'"
    Write-Host "  - Navigate to '$spaPortalUrl'"
-   Write-Host "  - Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'SPA'" -ForegroundColor Red 
+   Write-Host "  - Navigate to the Manifest page, find the 'replyUrlsWithType' section and change the type of redirect URI to 'Spa'" -ForegroundColor Red 
 
    Write-Host -ForegroundColor Green "------------------------------------------------------------------------------------------------" 
      
