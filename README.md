@@ -8,12 +8,12 @@ products:
   - microsoft-identity-platform  
 name: Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph
 urlFragment: ms-identity-javascript-v2
-description: "This sample demonstrates a Vanilla JavaScript SPA application calling the Microsoft Graph"
+description: "This sample demonstrates a Vanilla JavaScript SPA using MSAL.js to authorize users for calling the Microsoft Graph API"
 ---
 
 | In this Tutorial |Previous Tutorial | Next Tutorial | All Content |
 |------------------|------------------|----------------|------------|
-| authorization, access tokens, calling MS Graph | [Sign-in with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) | [Call a protected Web API](https://github.com/Azure-Samples/ms-identity-javascript-callapi) | [Table of Contents](https://github.com/Azure-Samples/ms-identity-javascript-tutorial) |
+| authorization, access tokens, calling MS Graph | [Sign-in with Azure AD](https://github.com/Azure-Samples/ms-identity-javascript-signin) | [Acquire an Access Token and call a protected Web API](https://github.com/Azure-Samples/ms-identity-javascript-callapi) | [Table of Contents](https://github.com/Azure-Samples/ms-identity-javascript-tutorial) |
 
 # Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph
 
@@ -42,7 +42,7 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 1. The **Access Token** is used as a *bearer* token to authorize the user to call the **Microsoft Graph API**.
 1. **Microsoft Graph API** responds with the resource that the user has access to.
 
-![Overview](./ReadmeFiles/topology.png)
+![Overview](./ReadmeFiles/topology_callgraph.png)
 
 ## Contents
 
@@ -56,9 +56,6 @@ This sample demonstrates a Vanilla JavaScript single-page application that lets 
 | `server.js`           | Simple Node server for `index.html`.        |
 | `AppCreationScripts/` | Contains Powershell scripts to automate app registration. |
 | `ReadmeFiles/`        | Contains illustrations and etc.             |
-| `CHANGELOG.md`        | List of changes to the sample.             |
-| `CONTRIBUTING.md`     | Guidelines for contributing to the sample. |
-| `LICENSE`             | The license for the sample.                |
 
 ## Prerequisites
 
@@ -183,24 +180,37 @@ Open the `app\authConfig.js` file. Then:
 
 > :information_source: Did the sample not work for you as expected? Then please reach out to us using the [GitHub Issues](../../../../issues) page.
 
+> :information_source: Consider taking a moment [share your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNzJIUUNCT1NaMjM2WEtZWEZYQTJZOFFWQSQlQCN0PWcu).
+
 ## About the code
 
-### Acquire a Token
+### Protected resources and scopes
 
-**Access Token** requests in **MSAL.js** are meant to be *per-resource-per-scope(s)*. This means that an **Access Token** requested for resource **A** with scope `scp1`:
+In order to access a protected resource on behalf of a signed-in user, the app needs to present a valid **Access Token** to that resource owner (in this case, Microsoft Graph). The intended recipient of an **Access Token** is represented by the `aud` claim (in this case, it should be the Microsoft Graph API's App ID); in case the value for the `aud` claim does not mach the resource **APP ID URI**, the token should be considered invalid. Likewise, the permissions that an **Access Token** grants is represented by the `scp` claim. See [Access Token claims](https://docs.microsoft.com/azure/active-directory/develop/access-tokens#payload-claims) for more information.
 
-- cannot be used for accessing resource **A** with scope `scp2`, and,
-- cannot be used for accessing resource **B** of any scope.
+### Dynamic scopes and incremental consent
 
-Bear in mind that you can request multiple scopes for the same resource (e.g. `User.Read`, `User.Write` and `Calendar.Read` for MS Graph API).
+In **Azure AD**, the scopes (permissions) set directly on the application registration are called static scopes. Other scopes that are only defined within the code are called dynamic scopes. This has implications on the **login** (i.e. loginPopup, loginRedirect) and **acquireToken** (i.e. `acquireTokenPopup`, `acquireTokenRedirect`, `acquireTokenSilent`) methods of **MSAL.js**. Consider:
 
 ```javascript
-    const graphToken = await msalInstance.acquireTokenSilent({
-         scopes: [ "User.Read", "User.Write", "Calendar.Read"] // all MS Graph API scopes
-    });
+     const loginRequest = {
+          scopes: [ "openid", "profile", "User.Read" ]
+     };
+     const tokenRequest = {
+          scopes: [ "Mail.Read" ]
+     };
+
+     // will return an ID Token and an Access Token with scopes: "openid", "profile" and "User.Read"
+     msalInstance.loginPopup(loginRequest);
+
+     // will fail and fallback to an interactive method prompting a consent screen
+     // after consent, the received token will be issued for "openid", "profile" ,"User.Read" and "Mail.Read" combined
+     msalInstance.acquireTokenSilent(tokenRequest);
 ```
 
-The intended recipient of an **Access Token** is represented by the `aud` claim; in case the value for the `aud` claim does not mach the resource APP ID URI, the token should be considered invalid. Likewise, the permissions that an Access Token grants is represented by the `scp` claim. See [Access Token claims](https://docs.microsoft.com/azure/active-directory/develop/access-tokens#payload-claims) for more information.
+In the code snippet above, the user will be prompted for consent once they authenticate and receive an **ID Token** and an **Access Token** with scope `User.Read`. Later, if they request an **Access Token** for `User.Read`, they will not be asked for consent again (in other words, they can acquire a token *silently*). On the other hand, the user did not consented to `Mail.Read` at the authentication stage. As such, they will be asked for consent when requesting an **Access Token** for that scope. The token received will contain all the previously consented scopes, hence the term *incremental consent*.
+
+### Acquire a Token
 
 **MSAL.js** exposes 3 APIs for acquiring a token: `acquireTokenPopup()`, `acquireTokenRedirect()` and `acquireTokenSilent()`:
 
@@ -243,28 +253,6 @@ The **MSAL.js** exposes the `acquireTokenSilent()` API which is meant to retriev
             handleError(error);
         });
 ```
-
-### Dynamic Scopes and Incremental Consent
-
-In **Azure AD**, the scopes (permissions) set directly on the application registration are called static scopes. Other scopes that are only defined within the code are called dynamic scopes. This has implications on the **login** (i.e. loginPopup, loginRedirect) and **acquireToken** (i.e. `acquireTokenPopup`, `acquireTokenRedirect`, `acquireTokenSilent`) methods of **MSAL.js**. Consider:
-
-```javascript
-     const loginRequest = {
-          scopes: [ "openid", "profile", "User.Read" ]
-     };
-     const tokenRequest = {
-          scopes: [ "Mail.Read" ]
-     };
-
-     // will return an ID Token and an Access Token with scopes: "openid", "profile" and "User.Read"
-     msalInstance.loginPopup(loginRequest);
-
-     // will fail and fallback to an interactive method prompting a consent screen
-     // after consent, the received token will be issued for "openid", "profile" ,"User.Read" and "Mail.Read" combined
-     msalInstance.acquireTokenSilent(tokenRequest);
-```
-
-In the code snippet above, the user will be prompted for consent once they authenticate and receive an **ID Token** and an **Access Token** with scope `User.Read`. Later, if they request an **Access Token** for `User.Read`, they will not be asked for consent again (in other words, they can acquire a token *silently*). On the other hand, the user did not consented to `Mail.Read` at the authentication stage. As such, they will be asked for consent when requesting an **Access Token** for that scope. The token received will contain all the previously consented scopes, hence the term *incremental consent*.
 
 ### Access Token validation
 
