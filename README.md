@@ -155,10 +155,15 @@ Open the project in your IDE (like Visual Studio or Visual Studio Code) to confi
 
 > In the steps below, "ClientID" is the same as "Application ID" or "AppId".
 
-1. Open the `app\authConfig.js` file.
+Open the `app\authConfig.js` file. Then:
+
 1. Find the key `Enter_the_Application_Id_Here` and replace the existing value with the application ID (clientId) of the `ms-identity-javascript-v2` application copied from the Azure portal.
-1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with "https://login.microsoftonline.com/"+$tenantName.
-1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for ms-identity-javascript-v2 app. For example, 'http://localhost:3000/' .
+1. Find the key `Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here` and replace the existing value with your *tenanted* authority string. For example, `https://login.microsoftonline.com/<your-tenant-id>`
+1. Find the key `Enter_the_Redirect_Uri_Here` and replace the existing value with the Redirect URI for ms-identity-javascript-v2 app. For example, `http://localhost:3000/`.
+
+Open the `app\authConfig.js` file. Then:
+
+1. Find the key `Enter_the_Graph_Endpoint_Here` and replace the existing value with the Microsoft Graph API endpoint copied from the Azure Portal. For example, `https://graph.microsoft.com`.
 
 ## Running the sample
 
