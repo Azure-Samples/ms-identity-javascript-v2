@@ -1,6 +1,6 @@
 {
     "Sample": {
-      "Title": "A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)",
+      "Title": "Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph",
       "Level": 100,
       "Client": "Vanilla JavaScript SPA",
       "Service": "Microsoft Graph",
@@ -15,7 +15,7 @@
         "Kind" :  "SinglePageApplication",
         "HomePage": "http://localhost:3000/",
         "ReplyUrls":"http://localhost:3000/",
-        "Audience": "AzureADandPersonalMicrosoftAccount",
+        "Audience": "AzureADMyOrg",
         "RequiredResourcesAccess": [
           {
             "Resource": "Microsoft Graph",
@@ -41,12 +41,12 @@
             "value": ".AppId"
           },
           {
-            "key": "Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here",
+            "key": "Enter_the_Cloud_Instance_Id_Here/Enter_the_Tenant_Info_Here",
             "value": "\"https://login.microsoftonline.com/\"+$tenantName"
           },
           {
             "key": "Enter_the_Redirect_Uri_Here",
-            "value": ".HomePage"
+            "value": ".ReplyUrls"
           }
         ]
       },

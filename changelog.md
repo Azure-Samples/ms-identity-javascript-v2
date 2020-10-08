@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 10/08/2020
+
+- Sample revised for chapterwise tutorial.
+
 ## 08/27/2020
 
 - Updated MSAL.js to 2.1.0.
