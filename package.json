@@ -24,7 +24,7 @@
     "node.js",
     "msal.js"
   ],
-  "author": "derisen",
+  "author": "",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Azure-Samples/ms-identity-javascript-v2/issues"

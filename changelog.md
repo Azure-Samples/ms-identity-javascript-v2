@@ -2,7 +2,7 @@
 
 ## 10/08/2020
 
-- Sample revised for chapterwise tutorial.
+- Revised comments in source code.
 
 ## 08/27/2020
 
