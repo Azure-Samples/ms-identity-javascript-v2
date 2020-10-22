@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 10/08/2020
+
+- Revised comments in source code.
+- Updated MSAL.js to 2.3.1
+
 ## 08/27/2020
 
 - Updated MSAL.js to 2.1.0.

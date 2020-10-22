@@ -1,7 +1,7 @@
 {
   "name": "ms-identity-javascript-v2",
   "version": "1.0.0",
-  "description": "---\r page_type: sample\r languages:\r - javascript\r products:\r - ms-identity\r description: \"A JavaScript single-page application which demonstrates how to configure MSAL.js to login, logout, protect a route, and acquire an access token for a protected resource such as Microsoft Graph API.\"\r urlFragment: ms-identity-javascript-v2\r ---",
+  "description": "A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -32,8 +32,7 @@
   "homepage": "https://github.com/Azure-Samples/ms-identity-javascript-v2#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "morgan": "^1.10.0",
-    "yargs": "^15.3.1"
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

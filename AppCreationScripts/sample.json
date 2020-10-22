@@ -1,13 +1,12 @@
 {
     "Sample": {
-      "Title": "A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)",
+      "Title": "Vanilla JavaScript Single-page Application using MSAL.js to authorize users for calling Microsoft Graph",
       "Level": 100,
       "Client": "Vanilla JavaScript SPA",
       "Service": "Microsoft Graph",
       "RepositoryUrl": "ms-identity-javascript-v2",
       "Endpoint": "AAD v2.0"
     },
-
     "AADApps": [
       {
         "Id": "spa",
@@ -15,7 +14,7 @@
         "Kind" :  "SinglePageApplication",
         "HomePage": "http://localhost:3000/",
         "ReplyUrls":"http://localhost:3000/",
-        "Audience": "AzureADandPersonalMicrosoftAccount",
+        "Audience": "AzureADMyOrg",
         "RequiredResourcesAccess": [
           {
             "Resource": "Microsoft Graph",
@@ -29,7 +28,6 @@
         ]
       }
     ],
-  
     "CodeConfiguration": [
       {
         "App": "spa",
@@ -46,7 +44,7 @@
           },
           {
             "key": "Enter_the_Redirect_Uri_Here",
-            "value": ".HomePage"
+            "value": ".ReplyUrls"
           }
         ]
       },

@@ -13,7 +13,7 @@ assignees: derisen
 
 - [ ] `@azure/msal-browser@2.x.x`
 
-**Important**: Please fill in your exact version number above, e.g. `msal@1.1.3`.
+**Important**: Please fill in your exact version number above, e.g. `msal@2.1.3`.
 
 ## Framework
 
