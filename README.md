@@ -65,6 +65,8 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 3. To start the sample application, run `npm start`.
 4. Finally, open a browser and navigate to [http://localhost:3000](http://localhost:3000).
 
+> How did we do? Consider [sharing your experience with us](https://forms.office.com/Pages/ResponsePage.aspx?id=v4j5cvGGr0GRqy180BHbR73pcsbpbxNJuZCMKN0lURpUNzlSS1hSVFBRU0pGNlBDRjY4UkRRNjBFMyQlQCN0PWcu).
+
 ## Key concepts
 
 This sample demonstrates the following MSAL workflows:
