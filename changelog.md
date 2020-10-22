@@ -3,6 +3,7 @@
 ## 10/08/2020
 
 - Revised comments in source code.
+- Updated MSAL.js to 2.3.1
 
 ## 08/27/2020
 

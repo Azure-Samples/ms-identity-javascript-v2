@@ -7,7 +7,6 @@
       "RepositoryUrl": "ms-identity-javascript-v2",
       "Endpoint": "AAD v2.0"
     },
-
     "AADApps": [
       {
         "Id": "spa",
@@ -29,7 +28,6 @@
         ]
       }
     ],
-  
     "CodeConfiguration": [
       {
         "App": "spa",

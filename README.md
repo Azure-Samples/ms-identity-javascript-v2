@@ -1,19 +1,23 @@
 ---
 page_type: sample
 languages:
-  - javascript
+- javascript
+- html
 products:
-  - ms-graph
-  - azure-active-directory
-  - microsoft-identity-platform  
-name: A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)
-urlFragment: ms-identity-javascript-v2
-description: "This sample demonstrates a Vanilla JavaScript SPA using MSAL.js to authorize users for calling the Microsoft Graph API"
+- ms-graph
+- azure-active-directory
+- microsoft-identity-platform
+description: "A simple JavaScript Single-Page Application using the Auth Code flow w/ PKCE"
+urlFragment: "ms-identity-javascript-v2"
 ---
 
-# A JavaScript single-page application calling Microsoft Graph API using MSAL.js (w/ AAD v2 endpoint)
+# MSAL.js 2.x Vanilla JavaScript Single-page Application
 
-A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as Microsoft Graph API. This version of the **MSAL.js** library uses the **Authorization Code flow w/ PKCE**.
+A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as **Microsoft Graph API**. This version of the MSAL.js library uses the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow).
+
+**Note:** A quickstart guide covering this sample can be found [here](https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-javascript-auth-code).
+
+**Note:** A more detailed tutorial covering this sample can be found [here](https://docs.microsoft.com/azure/active-directory/develop/tutorial-v2-javascript-auth-code).
 
 ## Contents
 
@@ -22,7 +26,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 | `app`             | Contains sample source files               |
 | `authPopup.js`    | Main authentication logic resides here (using Popup flow).            |
 | `authRedirect.js` | Use this instead of `authPopup.js` for authentication with redirect flow.   |
-| `authConfig.js`   | Contains configuration parameters for the sample. |
+| `authConfig.js`   | Contains configuration parameters for the sample.      |
 | `graph.js`        | Provides a helper function for calling MS Graph API.   |
 | `graphConfig.js`  | Contains API endpoints for MS Graph.       |
 | `ui.js`           | Contains UI logic.                         |
@@ -31,7 +35,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 | `CHANGELOG.md`    | List of changes to the sample.             |
 | `CODE_OF_CONDUCT.md` | Code of Conduct information.            |
 | `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
-| `package.json`    | Package manifest for npm.                   |
+| `package.json`    | Package manifest for npm.                  |
 | `README.md`       | This README file.                          |
 | `LICENSE`         | The license for the sample.                |
 | `SECURITY.md`     | Security disclosures.                      |
