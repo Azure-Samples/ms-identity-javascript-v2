@@ -12,7 +12,7 @@ function selectAccount() {
      */
 
     const currentAccounts = myMSALObj.getAllAccounts();
-    if (currentAccounts === null) {
+    if (currentAccounts.length === 0) {
         return;
     } else if (currentAccounts.length > 1) {
         // Add choose account code here
@@ -98,8 +98,6 @@ function seeProfile() {
     getTokenPopup(loginRequest)
         .then(response => {
             callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-            profileButton.classList.add('d-none');
-            mailButton.classList.remove('d-none');
         }).catch(error => {
             console.error(error);
         });

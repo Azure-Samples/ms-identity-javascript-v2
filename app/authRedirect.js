@@ -24,7 +24,7 @@ function selectAccount () {
 
     const currentAccounts = myMSALObj.getAllAccounts();
 
-    if (!currentAccounts) {
+    if (currentAccounts.length === 0) {
         return;
     } else if (currentAccounts.length > 1) {
         // Add your account choosing logic here
@@ -92,8 +92,6 @@ function seeProfile() {
     getTokenRedirect(loginRequest)
         .then(response => {
             callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-            profileButton.classList.add('d-none');
-            mailButton.classList.remove('d-none');
         }).catch(error => {
             console.error(error);
         });
