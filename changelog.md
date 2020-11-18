@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 11/18/2020
+
+- Updated MSAL.js to 2.6.1
+- Corrected account selection logic.
+- Removed UI update code from authPopup.js and authRedirect.js
+
 ## 10/08/2020
 
 - Revised comments in source code.

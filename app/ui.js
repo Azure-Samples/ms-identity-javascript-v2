@@ -19,6 +19,7 @@ function updateUI(data, endpoint) {
     console.log('Graph API responded at: ' + new Date().toString());
 
     if (endpoint === graphConfig.graphMeEndpoint) {
+        profileDiv.innerHTML = ''
         const title = document.createElement('p');
         title.innerHTML = "<strong>Title: </strong>" + data.jobTitle;
         const email = document.createElement('p');
