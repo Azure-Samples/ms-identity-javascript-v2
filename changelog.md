@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 04/20/2021
+
+- Updated MSAL.js to 2.13.1
+- Added logoutPopup and logoutRedirect APIs.
+
 ## 11/18/2020
 
 - Updated MSAL.js to 2.7.0

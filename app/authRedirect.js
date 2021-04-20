@@ -61,12 +61,12 @@ function signOut() {
      * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
      */
 
-    // Choose which account to logout from by passing a username.
     const logoutRequest = {
-        account: myMSALObj.getAccountByUsername(username)
+        account: myMSALObj.getAccountByUsername(username),
+        postLogoutRedirectUri: msalConfig.auth.redirectUri,
     };
 
-    myMSALObj.logout(logoutRequest);
+    myMSALObj.logoutRedirect(logoutRequest);
 }
 
 function getTokenRedirect(request) {
