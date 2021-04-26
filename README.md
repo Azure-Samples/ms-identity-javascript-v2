@@ -11,9 +11,9 @@ description: "A simple JavaScript Single-Page Application using the Auth Code fl
 urlFragment: "ms-identity-javascript-v2"
 ---
 
-# MSAL.js 2.x Vanilla JavaScript Single-page Application
+# Vanilla JavaScript Single-page Application secured with MSAL.js
 
-A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as **Microsoft Graph API**. This version of the MSAL.js library uses the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow).
+A simple vanilla JavaScript single-page application which demonstrates how to configure [MSAL.JS 2.x](https://www.npmjs.com/package/@azure/msal-browser) to login, logout, and acquire an access token for a protected resource such as the **Microsoft Graph API**. This version of the MSAL.js library uses the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow).
 
 **Note:** A quickstart guide covering this sample can be found [here](https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-javascript-auth-code).
 
@@ -32,13 +32,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 | `ui.js`           | Contains UI logic.                         |
 | `index.html`      |  Contains the UI of the sample.            |
 | `.gitignore`      | Define what to ignore at commit time.      |
-| `CHANGELOG.md`    | List of changes to the sample.             |
-| `CODE_OF_CONDUCT.md` | Code of Conduct information.            |
-| `CONTRIBUTING.md` | Guidelines for contributing to the sample. |
 | `package.json`    | Package manifest for npm.                  |
-| `README.md`       | This README file.                          |
-| `LICENSE`         | The license for the sample.                |
-| `SECURITY.md`     | Security disclosures.                      |
 | `server.js`     | Implements a simple Node server to serve index.html.  |
 
 ## Prerequisites
