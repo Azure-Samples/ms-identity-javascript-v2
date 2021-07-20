@@ -33,8 +33,9 @@ Function ConfigureApplications {
     Write-Host "Creating the AAD application (ms-identity-javascript-v2)"
     # create the application 
     $spaAadApplication = New-MgApplication -DisplayName "ms-identity-javascript-v2" `
-        -SignInAudience AzureADandPersonalMicrosoftAccount `
+        -SignInAudience AzureADMyOrg `
         -Spa @{RedirectUris = "http://localhost:3000" } `
+
 
     # create the service principal of the newly created application 
     New-MgServicePrincipal -AppId $spaAadApplication.AppId -Tags { WindowsAzureActiveDirectoryIntegratedApp }
@@ -67,7 +68,7 @@ Function ConfigureApplications {
     # Update config file for 'spa'
     $configFile = $pwd.Path + "\..\app\authConfig.js"
     Write-Host "Updating the sample code ($configFile)"
-    $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId; "Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/common"; "Enter_the_Redirect_Uri_Here" = $spaAadApplication.Spa.RedirectUris[0] };
+    $dictionary = @{ "Enter_the_Application_Id_Here" = $spaAadApplication.AppId; "Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here" = "https://login.microsoftonline.com/" + $TenantId; "Enter_the_Redirect_Uri_Here" = $spaAadApplication.Spa.RedirectUris[0] };
     ReplaceInTextFile -configFilePath $configFile -dictionary $dictionary
 
     # Update config file for 'spa'
