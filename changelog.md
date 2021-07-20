@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 07/20/2021
+
+- Updated MSAL.js to 2.15.0
+- AppCreationScripts now use Powershell Graph SDK.
+
 ## 04/20/2021
 
 - Updated MSAL.js to 2.13.1

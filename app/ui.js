@@ -34,7 +34,9 @@ function updateUI(data, endpoint) {
         profileDiv.appendChild(address);
 
     } else if (endpoint === graphConfig.graphMailEndpoint) {
-        if (data.value.length < 1) {
+        if (!data.value) {
+            alert("You do not have a mailbox!")
+        } else if (data.value.length < 1) {
             alert("Your mailbox is empty!")
         } else {
             const tabContent = document.getElementById("nav-tabContent");
