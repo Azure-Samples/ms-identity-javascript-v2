@@ -6,7 +6,7 @@
 1. In PowerShell run:
 
   ```PowerShell
-    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process -Force
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
   ```
 
 1. Run the script to create your Azure AD application and configure the code of the sample application accordingly.
@@ -41,24 +41,13 @@ The `Configure.ps1` will stop if it tries to create an Azure AD application whic
 1. Until you change it, the default [Execution Policy](https:/go.microsoft.com/fwlink/?LinkID=135170) for scripts is usually `Restricted`. In order to run the PowerShell script you need to set the Execution Policy to `RemoteSigned`. You can set this just for the current PowerShell process by running the command:
 
     ```PowerShell
-      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+      Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
     ```
 
 The scripts install the required PowerShell module (Microsoft.Graph.Applications) for the current user if needed. However, if you want to install if for all users on the machine, you can follow the steps below:
 
-1. If you have never done it already, in the PowerShell window, install the AzureAD PowerShell modules. For this:
-   1. Open PowerShell as admin (On Windows, Search Powershell in the search bar, right click on it and select Run as administrator).
-   2. Type:
-
-    ```PowerShell
-      Install-Module Microsoft.Graph.Applications
-    ```
-  
-    or if you cannot be administrator on your machine, run:
-  
-    ```PowerShell
-      Install-Module Microsoft.Graph.Applications -Scope CurrentUser
-    ```
+  1. Open PowerShell as admin (On Windows, Search Powershell in the search bar, right click on it and select Run as administrator).
+  2. Type: `Install-Module Microsoft.Graph.Applications`
 
 ### Running the script
   
