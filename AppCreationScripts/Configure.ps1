@@ -4,7 +4,7 @@ param(
     [string] $TenantId
 )
 
-#Requires -Modules Microsoft.Graph.Applications -RunAsAdministrator
+#Requires -Modules Microsoft.Graph.Applications
 
 # Pre-requisites
 if ($null -eq (Get-Module -ListAvailable -Name "Microsoft.Graph.Applications")) {
