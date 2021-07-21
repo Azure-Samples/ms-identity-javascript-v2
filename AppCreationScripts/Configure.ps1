@@ -34,7 +34,7 @@ Function ConfigureApplications {
     # create the application 
     $spaAadApplication = New-MgApplication -DisplayName "ms-identity-javascript-v2" `
         -SignInAudience AzureADMyOrg `
-        -Spa @{RedirectUris = "http://localhost:3000", "http://localhost:3000/redirect" } `
+        -Spa @{RedirectUris = "http://localhost:3000" } `
 
 
     # create the service principal of the newly created application 
