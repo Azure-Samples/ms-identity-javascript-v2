@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 07/02/2022
+
+- Updated MSAL.js to 2.26.0
+
 ## 07/20/2021
 
 - Updated MSAL.js to 2.15.0
