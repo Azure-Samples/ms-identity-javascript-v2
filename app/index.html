@@ -36,12 +36,16 @@
         <div class="card-body">
           <h5 class="card-title" id="WelcomeMessage">Please sign-in to see your profile and read your mails</h5>
           <div id="profile-div"></div>
+          <pre id="response" class="card-text"></pre>
           <br>
           <br>
           <button class="btn btn-primary" id="seeProfile" onclick="seeProfile()">See Profile</button>
           <br>
           <br>
           <button class="btn btn-primary" id="readMail" onclick="readMail()">Read Mails</button>
+          <br>
+          <br>
+          <button class="btn btn-primary" id="callApi" onclick="passTokenToApi()">Call Api</button>
         </div>
       </div>
     </div>
@@ -74,6 +78,7 @@
   <script type="text/javascript" src="./authConfig.js"></script>
   <script type="text/javascript" src="./graphConfig.js"></script>
   <script type="text/javascript" src="./ui.js"></script>
+  <script type="text/javascript" src="./myApi.js"></script>
 
   <!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
   <!-- uncomment the above line and comment the line below if you would like to use the redirect flow -->

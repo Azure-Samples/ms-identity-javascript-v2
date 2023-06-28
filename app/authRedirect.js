@@ -9,99 +9,126 @@ let username = "";
  * response returned from redirect flow. For more information, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/acquire-token.md
  */
-myMSALObj.handleRedirectPromise()
-    .then(handleResponse)
-    .catch((error) => {
-        console.error(error);
-    });
+myMSALObj
+  .handleRedirectPromise()
+  .then(handleResponse)
+  .catch((error) => {
+    console.error(error);
+  });
 
-function selectAccount () {
+function selectAccount() {
+  /**
+   * See here for more info on account retrieval:
+   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+   */
 
-    /**
-     * See here for more info on account retrieval: 
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-     */
+  const currentAccounts = myMSALObj.getAllAccounts();
 
-    const currentAccounts = myMSALObj.getAllAccounts();
-
-    if (currentAccounts.length === 0) {
-        return;
-    } else if (currentAccounts.length > 1) {
-        // Add your account choosing logic here
-        console.warn("Multiple accounts detected.");
-    } else if (currentAccounts.length === 1) {
-        username = currentAccounts[0].username;
-        showWelcomeMessage(username);
-    }
+  if (currentAccounts.length === 0) {
+    return;
+  } else if (currentAccounts.length > 1) {
+    // Add your account choosing logic here
+    console.warn("Multiple accounts detected.");
+  } else if (currentAccounts.length === 1) {
+    username = currentAccounts[0].username;
+    showWelcomeMessage(username);
+  }
 }
 
 function handleResponse(response) {
-    if (response !== null) {
-        username = response.account.username;
-        showWelcomeMessage(username);
-    } else {
-        selectAccount();
-    }
+  if (response !== null) {
+    username = response.account.username;
+    showWelcomeMessage(username);
+  } else {
+    selectAccount();
+  }
 }
 
 function signIn() {
+  /**
+   * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
+   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
+   */
 
-    /**
-     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-     */
-
-    myMSALObj.loginRedirect(loginRequest);
+  myMSALObj.loginRedirect(loginRequest);
 }
 
 function signOut() {
+  /**
+   * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
+   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
+   */
 
-    /**
-     * You can pass a custom request object below. This will override the initial configuration. For more information, visit:
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/request-response-object.md#request
-     */
+  const logoutRequest = {
+    account: myMSALObj.getAccountByUsername(username),
+    postLogoutRedirectUri: msalConfig.auth.redirectUri,
+  };
 
-    const logoutRequest = {
-        account: myMSALObj.getAccountByUsername(username),
-        postLogoutRedirectUri: msalConfig.auth.redirectUri,
-    };
-
-    myMSALObj.logoutRedirect(logoutRequest);
+  myMSALObj.logoutRedirect(logoutRequest);
 }
 
 function getTokenRedirect(request) {
-    /**
-     * See here for more info on account retrieval: 
-     * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
-     */
-    request.account = myMSALObj.getAccountByUsername(username);
+  /**
+   * See here for more info on account retrieval:
+   * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-common/docs/Accounts.md
+   */
+  request.account = myMSALObj.getAccountByUsername(username);
 
-    return myMSALObj.acquireTokenSilent(request)
-        .catch(error => {
-            console.warn("silent token acquisition fails. acquiring token using redirect");
-            if (error instanceof msal.InteractionRequiredAuthError) {
-                // fallback to interaction when silent call fails
-                return myMSALObj.acquireTokenRedirect(request);
-            } else {
-                console.warn(error);   
-            }
-        });
+  return myMSALObj.acquireTokenSilent(request).catch((error) => {
+    console.warn(
+      "silent token acquisition fails. acquiring token using redirect"
+    );
+    if (error instanceof msal.InteractionRequiredAuthError) {
+      // fallback to interaction when silent call fails
+      return myMSALObj.acquireTokenRedirect(request);
+    } else {
+      console.warn(error);
+    }
+  });
 }
 
 function seeProfile() {
-    getTokenRedirect(loginRequest)
-        .then(response => {
-            callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
-        }).catch(error => {
-            console.error(error);
-        });
+  getTokenRedirect(loginRequest)
+    .then((response) => {
+      callMSGraph(graphConfig.graphMeEndpoint, response.accessToken, updateUI);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function readMail() {
-    getTokenRedirect(tokenRequest)
-        .then(response => {
-            callMSGraph(graphConfig.graphMailEndpoint, response.accessToken, updateUI);
-        }).catch(error => {
-            console.error(error);
-        });
+  getTokenRedirect(tokenRequest)
+    .then((response) => {
+      callMSGraph(
+        graphConfig.graphMailEndpoint,
+        response.accessToken,
+        updateUI
+      );
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+// function callApi() {
+//   var apiUrl = "https://localhost:7192/WeatherForecast";
+//   getTokenRedirect(tokenRequest)
+//     .then((response) => {
+//       callMyApi(apiUrl, response.accessToken, updateAPIResponse);
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//     });
+// }
+
+// Acquires and access token and then passes it to the API call
+function passTokenToApi() {
+  getTokenRedirect(tokenRequest)
+    .then((response) => {
+      callApi(apiConfig.uri, response.accessToken);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
