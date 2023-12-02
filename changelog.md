@@ -42,7 +42,7 @@
 
 ## 20/04/2020
 
-- Added apps.json for AAD Portal automation.
+- Added apps.json for Microsoft Entra admin center automation.
 - Added sample.json and .ps scripts for registration automation.
 
 ## 19/04/2020

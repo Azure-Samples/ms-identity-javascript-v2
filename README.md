@@ -5,7 +5,7 @@ languages:
 - html
 products:
 - ms-graph
-- azure-active-directory
+- microsoft-entra-id
 - microsoft-identity-platform
 description: "A simple JavaScript Single-Page Application using the Auth Code flow w/ PKCE"
 urlFragment: "ms-identity-javascript-v2"
@@ -41,7 +41,7 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 
 ## Setup
 
-1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Azure Portal](https://portal.azure.com). Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type `SPA`.
+1. [Register a new application](https://docs.microsoft.com/azure/active-directory/develop/scenario-spa-app-registration) in the [Microsoft admin center](https://portal.azure.com). Ensure that the application is enabled for the [authorization code flow with PKCE](https://docs.microsoft.com/azure/active-directory/develop/v2-oauth2-auth-code-flow). This will require that you redirect URI configured in the portal is of type `SPA`.
 2. Open the [/app/authConfig.js](./app/authConfig.js) file and provide the required configuration values.
 3. On the command line, navigate to the root of the repository, and run `npm install` to install the project dependencies via npm.
 
@@ -49,9 +49,9 @@ A simple vanilla JavaScript single-page application which demonstrates how to co
 
 1. Configure authentication and authorization parameters:
    1. Open `authConfig.js`
-   2. Replace the string `"Enter_the_Application_Id_Here"` with your app/client ID on AAD Portal.
+   2. Replace the string `"Enter_the_Application_Id_Here"` with your app/client ID on Microsoft Entra admin center.
    3. Replace the string `"Enter_the_Cloud_Instance_Id_HereEnter_the_Tenant_Info_Here"` with `"https://login.microsoftonline.com/common/"` (*note*: This is for multi-tenant applications located on the global Azure cloud. For more information, see the [documentation](https://docs.microsoft.com/azure/active-directory/develop/quickstart-v2-javascript-auth-code)).
-   4. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on AAD Portal.
+   4. Replace the string `"Enter_the_Redirect_Uri_Here"` with the redirect uri you setup on Microsoft Entra admin center.
 2. Configure the parameters for calling MS Graph API:
    1. Open `graphConfig.js`.
    2. Replace the string `"Enter_the_Graph_Endpoint_Herev1.0/me"` with `"https://graph.microsoft.com/v1.0/me"`.

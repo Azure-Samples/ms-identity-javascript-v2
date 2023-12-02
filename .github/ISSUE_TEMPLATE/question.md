@@ -21,6 +21,6 @@ Examples:
 > "How do I use MSAL with Vue.js"
 > "How do I SSO between tabs?"
 > "How do I use MSAL to protect my custom Web API?"
-> "How can my app support multiple AAD tenants?"
+> "How can my app support multiple Microsoft Entra tenants?"
 > "When will my scenario be supported?"
 > "When will this framework be supported"
